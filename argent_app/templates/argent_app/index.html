@@ -1,0 +1,22 @@
+{% extends "argent_app/base.html"%}
+
+{% block body %}
+<div>Welcome to the test page</div>
+
+{{error_message}}
+
+<form name="register-form" action="{% url "login" %}" method="POST" >
+ {% csrf_token %}
+ <div class="form-group">
+  <label for="username">Username:</label>	
+  <input type="text" class='form-control' name="username" id="username">
+ </div>
+ <div class="form-group">
+  <label for="password">Password:</label>   
+  <input type="password" class='form-control' name="password" id="password">
+ </div>
+ <input type="submit" name="">
+</form>
+
+
+{% endblock %}

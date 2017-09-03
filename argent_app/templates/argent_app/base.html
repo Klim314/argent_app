@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "argent_app/bootstrap-3.3.7-dist/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "argent_app/bootstrap-3.3.7-dist/css/bootstrap-theme.css" %}">
+    <link rel="stylesheet" href="{% static "argent_app/custom.css" %}">
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+  <div class="mainbox">
+  {% block body %}
+  {% endblock %}
+  </div>
+
+  <script type="text/javascript" src="{% static "argent_app/jquery-3.2.1.js"%}"></script>
+  <script type="text/javascript" src="{% static "argent_app/bootstrap-3.3.7-dist/js/bootstrap.js"%}"></script>
+  {% block scripts %}
+  {% endblock %}
+  </body>
+</html>
+
+

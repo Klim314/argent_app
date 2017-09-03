@@ -1,0 +1,117 @@
+{% extends "argent_app/base.html"%}
+
+{% block body %}
+
+
+<!--<div id="controlbox">
+	<div class="col-md-8">
+		<table id="room-table">
+			<thead>
+				<tr>
+					<th>Rooms</th>
+				</tr>
+			</thead>
+			<tbody id="room-table-body">
+				<tr>
+					<td>ROW1</td>
+				</tr>
+			</tbody>
+		</table>	
+	</div>
+	<div class="col-md-4">
+	md4
+	</div>
+</div>-->
+
+
+<div class="col-md-6">
+<div><h4>Welcome to the Room Manager <b>{{username}}</b></h4></div>
+<span><h5>Join Room</h5></span>
+	<form name="room-form" action="{% url "room_join" %}" method="POST" class="panel panel-default " style="padding:10px;">
+ {% csrf_token %}
+ <div class="form-group">
+  <label for="room">Room Name:</label>	
+  <input type="text" class='form-control' name="room-name" id="room-name">
+ </div>
+ <div class="form-group">
+  <label for="room">Room Password:</label>	
+  <input type="text" class='form-control' name="room-password" id="room-password">
+ </div>
+ <input type="submit" name="" value="Join">
+</form>
+<b>{{room_join_error}}</b>
+<span><h5>Create Room</h5></span>
+<div class="panel panel-default" style="padding:10px;">
+	<form name="create-room-form" action="{% url "room_create" %}" method="POST" >
+	 {% csrf_token %}
+	 <div class="form-group">
+	  <label for="room-name">Room Name:</label>	
+	  <input type="text" class='form-control' name="room-name" id="room-name">
+	 </div>
+	 <div class="form-group">
+	  <label for="room-password">Room Password:</label>	
+	  <input type="text" class='form-control' name="room-password" id="room-password">
+	 </div>
+	 <input type="submit" name="" value="Create Room">
+</form>	
+</div>
+<div class="form-group">
+	<table class="table table-bordered" id="view_table">
+	<thead>
+		<tr>
+			<th>Host</th>
+			<th>Room Name</th>
+			<th># In room</th>
+			<th style="display:none">room_id</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for host, room_name, in_room_count, room_id in room_data %}
+		<tr>
+			<td>{{host}}</td>
+			<td>{{room_name}}</td>
+			<td>{{in_room_count}}</td>
+			<td style="display:none">{{room_id}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	</table>
+	<button class="btn" id="join-room-button">Join Room</button>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+	// initialize constants
+	var $selected = null
+
+	// Selection of the room to join
+	$("#view_table tbody tr").click(function(){
+		if ($selected){
+			$selected.removeClass("highlight")
+		}
+		$t = $(this)
+		$t.addClass("highlight")
+		$selected = $(this)
+		$t.children().each(function() {
+			console.log(console.log($(this).html()))
+		})
+	})
+
+	// Joining of the room
+	$("#join-room-button").click(function(){
+		if (!$selected){
+			alert("No room selected. Please select a room to join")
+			}
+		else{$.get("{% url "room_join" %}",
+				   {"room_id": $selected.find("td:eq(3)").text(),
+					"csrfmiddlewaretoken": "{{ csrf_token }}"}
+					)
+			}
+		})
+
+</script>
+{% endblock %}
