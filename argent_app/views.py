@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect, HttpResponse
+from django.http import JsonResponse
 from django.views import View
 from argent_app.models import Room, InRoom
 from django.contrib.auth import authenticate
@@ -10,6 +11,8 @@ from django.contrib.auth.models import User
 # Create your views here.
 class Index(View):
     def get(self, request):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect(reverse("room_manage"))
         return render(request, "argent_app/index.html", {})
 
 
@@ -24,7 +27,8 @@ class Manage(View):
                       context={"room_data": [(room.host,
                                               room.room_name,
                                               "placeholder",
-                                              room.id) for room in rooms]})
+                                              room.id,
+                                              bool(room.room_password)) for room in rooms]})
 
 
 class Create(View):
@@ -54,8 +58,37 @@ class Join(View):
         user = User.objects.get(id=request.user.id)
         print(room.host.id, request.user.id)
         current_users = [i.user.username for i in InRoom.objects.filter(room=room)]
-        if room.host.id == request.user.id or InRoom.objects.filter(room=room, user=user):
+        if room.host == request.user or InRoom.objects.filter(room=room, user=user).first():
             return HttpResponse(("Welcome user {} to room {}.\n"
                                  "Current users: {}").format(user.username,
                                                              room.room_name,
                                                              current_users))
+        return HttpResponse("LOL")
+
+
+class RoomQuery(View):
+    """
+    Queries for room information.
+    """
+    def get(self, request):
+        #
+        print("USERID", request.user.id)
+        print("HOT")
+        print(request.GET)
+        if "room_id" not in request.GET:
+            raise Exception("No id in query get request ")
+        room_id = request.GET["room_id"]
+        room = Room.objects.get(id=room_id)
+        if not room:
+            return JsonResponse({"status": False}, status=404)
+        elif (room.host == request.user or
+              InRoom.objects.filter(user=request.user, room=room).first()):
+            return JsonResponse({
+                "status": True,
+                "passworded": False
+                })
+        else:
+            print("RETURNED")
+            return JsonResponse({
+                "status": True,
+                "passworded": bool(room.room_password)})

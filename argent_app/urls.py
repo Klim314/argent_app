@@ -21,8 +21,9 @@ from argent_app import views
 urlpatterns = [
     url(r'^$', views.Index.as_view(), name="index"),
     url(r'^manage/', login_required(views.Manage.as_view()), name='room_manage'),
-    url(r'^join/', views.Join.as_view(), name='room_join'),
     url(r'^create/', login_required(views.Create.as_view()), name='room_create'),
     url(r'^browse/', login_required(views.Browse.as_view()), name='room_browse'),
-    url(r'^join/', login_required(views.View.as_view()), name='room_join'),
+    url(r'^join/', login_required(views.Join.as_view()), name='room_join'),
+    url(r'^query/', views.RoomQuery.as_view(), name='room_query'),
+
 ]

@@ -26,7 +26,7 @@
 
 
 <div class="col-md-6">
-<div><h4>Welcome to the Room Manager <b>{{username}}</b></h4></div>
+<div><h4>Welcome to the Room Manager <b>{{user.username}}</b></h4></div>
 <span><h5>Join Room</h5></span>
 	<form name="room-form" action="{% url "room_join" %}" method="POST" class="panel panel-default " style="padding:10px;">
  {% csrf_token %}
@@ -67,7 +67,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for host, room_name, in_room_count, room_id in room_data %}
+		{% for host, room_name, in_room_count, room_id, passworded in room_data %}
 		<tr>
 			<td>{{host}}</td>
 			<td>{{room_name}}</td>
@@ -109,13 +109,36 @@
 			alert("No room selected. Please select a room to join")
 			}
 		else{
-			console.log("JOINING {% url "room_join" %}")
-			$.redirect("{% url "room_join" %}",
-					   {"room_id": $selected.find("td:eq(3)").text(),
-						"csrfmiddlewaretoken": "{{ csrf_token }}"},
-						method="GET")
+			var data = {"room_id": $selected.find("td:eq(3)").text(),
+						"csrfmiddlewaretoken": "{{ csrf_token }}"}
+			var test = $.getJSON("{% url 'room_query'%}",
+					  {"room_id": $selected.find("td:eq(3)").text()},
+					  function(json){
+					  	room_login_callback(json, data)
+					  })
+			
 			}
 		})
 
+	room_login_callback = function(json, data){
+		if (!json["status"]){
+			return
+		}
+		if (json["passworded"]){
+			var password = prompt("Room is passworded. Please enter password")
+			if (password == null){
+				return
+			}
+			data["password"] = password
+		}
+		else{
+			data["password"] = ""
+		}
+		console.log("JOINING {% url "room_join" %}")
+		window.location.href = "{% url 'room_join' %}" + "?room_id=" + data["room_id"] + "&password=" + data["password"]
+
+
+
+	}
 </script>
 {% endblock %}
