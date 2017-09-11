@@ -54,16 +54,26 @@ class Browse(View):
 
 class Join(View):
     def get(self, request):
-        room, created = Room.objects.get_or_create(id=request.GET['room_id'])
-        user = User.objects.get(id=request.user.id)
+        room = Room.objects.get(id=request.GET['room_id'])
+        user = request.user
         print(room.host.id, request.user.id)
+        # Check if user is already in room
         current_users = [i.user.username for i in InRoom.objects.filter(room=room)]
         if room.host == request.user or InRoom.objects.filter(room=room, user=user).first():
             return HttpResponse(("Welcome user {} to room {}.\n"
                                  "Current users: {}").format(user.username,
                                                              room.room_name,
                                                              current_users))
-        return HttpResponse("LOL")
+        # User not in room, check credentials
+        if room.room_password and request.GET["password"] != room.room_password:
+            return HttpResponse("Invalid password")
+        in_room, created = InRoom.objects.get_or_create(room=room,
+                                                        user=request.user)
+        return HttpResponse(("Welcome user {} to room {}.\n"
+                             "Current users: {}").format(user.username,
+                                                         room.room_name,
+                                                         current_users))
+
 
 
 class RoomQuery(View):
@@ -92,3 +102,14 @@ class RoomQuery(View):
             return JsonResponse({
                 "status": True,
                 "passworded": bool(room.room_password)})
+
+class RoomFunctions(View):
+    """
+
+    """
+    def get(self, request):
+        pass
+    def kick(self, user, room):
+        pass
+    def invite(self, user, room):
+        pass
