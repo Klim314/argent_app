@@ -1,0 +1,183 @@
+
+#content{
+    padding: 0.5em;
+    width: 100%;
+}
+
+#wrapper{
+    display: flex;
+    align-items: stretch;
+}
+
+.indented-block{
+    margin-left: 3%;
+}
+
+.sidebar-header{
+    margin: 10px;
+}
+
+#sidebar{
+    background: #1a1a1a;
+    color: #fff;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#sidebar.active{
+    margin-left: -250px;
+}
+
+@media (max-width: 768px){
+    #sidebar{
+        margin-left: -250px;
+    }
+    #sidebar.active{
+        margin-left: 0px;
+    }
+
+}
+
+/*header stuff*/
+
+.hamburger {
+    height: 35px;
+    width: 45px;
+    box-shadow: none;
+    cursor: pointer;
+    padding: 0px 6px 0px 6px;
+}
+
+.bar1, .bar2, .bar3 {
+    height: 5px;
+    width: 100%px;
+    margin: 6px 0px 0px 0px;
+    background-color: #1a1a1a;
+}
+
+.bar3{
+    margin: 6px 0px 6px 0px;
+}
+
+.navbar{
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+/*Card box stuff*/
+.card-box{
+    margin: 1em;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    width: 100%;
+}
+
+.card{
+    display: inline-flex;
+    /*align-items: center;*/
+    height: 20em;
+    width: 16%;
+    border-style: none;
+    border-color: gray;
+    margin: 1em .2em 0 .2em;
+}
+@media (max-width: 768px){
+    .card{
+        width: 25%;
+    }
+
+    .card-color-box{
+    height:2em;
+    width: 75%;
+    margin: 1em 0 1em 0.2em;
+}
+}
+
+.card-descriptor-container{
+    float: left;
+    width: 80%;
+    height: 100%;
+    background-color: #DEB887;
+    display: inline-flex;
+    text-align: left;
+    justify-content: left;
+    align-items: center;
+}
+
+
+.card-descriptor{
+    width: 75%;
+    margin: 1em;
+    justify-content: left;
+    background-color: white;
+    padding: 0.3em;
+
+}
+
+.card-color-container{
+    float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    height: 100%;
+    background-color: #8B4513;
+}
+
+.card-color-box{
+    height:2em;
+    width: auto;
+    margin: 1em 0 1em 1em;
+}
+
+.cont1{
+    width: 100%;
+    height: 100%;
+}
+
+/* Color objects*/
+.red{
+    background-color: red
+}
+
+.blue{
+    background-color: blue
+}
+.green{
+    background-color: green
+}
+.gray{
+    background-color: gray
+}
+.yellow{
+    background-color: yellow
+}
+
+.purple{
+    background-color: purple
+}
+
+.transparent{
+    opacity=0
+}
+
+.testlist{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.testlist-element{
+    text-align: center;
+    display: table-row;
+}

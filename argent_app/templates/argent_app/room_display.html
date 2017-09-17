@@ -1,239 +1,85 @@
-{% extends "display_access/base.html"%}
+{% extends "argent_app/base.html"%}
+{% load staticfiles %}
 {% block head %}
-
+<link rel="stylesheet" href="{% static "argent_app/css/room_display.css" %}">
 {% endblock %}
 {% block body %}
+<div id='wrapper'>
+	<nav id='sidebar'>
+		<div class='sidebar-header'>
+			<h3>Working Title</h3>
+		</div>
+		<div><b>Room name: </b>{{room.room_name}}</div>
+		<div class='in-room'>
+			<div><b>In room</b></div>
+			<div class="indented-block">
+				<div class="in-room-user" id="in-room-host">{{room.host.username}} (host)</div>
+			</div>
+		</div>
+	</nav>
+	<div id='content'>
+		<div class="navbar navbar-default">
+			<div class='hamburger'>
+				<a href="#" id='sidebar_collapse'>
+					<div class='bar1'></div>
+					<div class='bar2'></div>
+					<div class='bar3'></div>
+				</a>
+			</div>
+		</div>
 
- <span>Welcome to the Room {{room.room_name}} hosted by {{room.host_name}}</span> <br>
- <span>Room Id: {{room.room_id}}</span>	<br><br>
+		<div class="cardbox">
+			{% for i in "xxxxxxxxxxxx" %}
+				{% if forloop.counter0 == 0 or forloop.counter0 == 6 %}
+				<div id="card_{{forloop.counter0}}" class="card">
+					<div class="cont1">
+						<div class="card-descriptor-container">
+							<div class="card-descriptor">
+								{% if forloop.counter0 == 0%}
+								Most Influence
+								{% else %}
+								Most Supporters
+								{% endif%}
+							</div>
+						</div>
+						<div class="card-color-container">
+							<div class="card-color-box red"></div>
+							<div class="card-color-box blue"></div>
+							<div class="card-color-box purple"></div>
+							<div class="card-color-box green"></div>
+							<div class="card-color-box gray"></div>
+							<div class="card-color-box yellow"></div>
+						</div>
+					</div>
+				</div>
+				{% else %}
+				<div id="card_{{forloop.counter0}}" class="card">
+					<div class="cont1">
+						<div class="card-descriptor-container">
+							<select class="form-control card-descriptor">
+								<option>Unknown</option>
+								<option>2nd Inf</option>
+								<option>2nd Supp</option>
+								<option>Most Div</option>
+								<option>Most Sorcery</option>
+							</select>
+						</div>
+						<div class="card-color-container">
+							<div class="card-color-box red"></div>
+							<div class="card-color-box blue"></div>
+							<div class="card-color-box purple"></div>
+							<div class="card-color-box green"></div>
+							<div class="card-color-box gray"></div>
+							<div class="card-color-box yellow"></div>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
 
-
- <div id="main" >-
- 	<div>
- 		<b><h3>Supporters</h3></b>
- 		<br>
- 		<div class="col-md-2 panel-default panel" >
- 			<div class="box" id="box1">
-				<div class="card-box dotted" >
-					<div id="1" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
-			<div class="box" id="box2">
-				<div class="card-box dotted" >
-					<div id="2" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
- 		</div>
-
- 		<div class="col-md-2 panel-default panel" >
- 			<div class="box" id="box1">
-				<div class="card-box dotted" >
-					<div id="1" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></divs</div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
-			<div class="box" id="box2">
-				<div class="card-box dotted" >
-					<div id="2" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
- 		</div></div>
-
- 		<div class="col-md-2 panel-default panel" >
- 			<div class="box" id="box1">
-				<div class="card-box dotted" >
-					<div id="1" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
-			<div class="box" id="box2">
-				<div class="card-box dotted" >
-					<div id="2" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
- 		</div>
-
- 		<div class="col-md-2 panel-default panel" >
- 			<div class="box" id="box1">
-				<div class="card-box dotted" >
-					<div id="1" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
-			<div class="box" id="box2">
-				<div class="card-box dotted" >
-					<div id="2" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
- 		</div>
-
- 		<div class="col-md-2 panel-default panel" >
- 			<div class="box" id="box1">
-				<div class="card-box dotted" >
-					<div id="1" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
-			<div class="box" id="box2">
-				<div class="card-box dotted" >
-					<div id="2" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
- 		</div>
-
- 		<div class="col-md-2 panel-default panel" >
- 			<div class="box" id="box1">
-				<div class="card-box dotted" >
-					<div id="1" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
-			<div class="box" id="box2">
-				<div class="card-box dotted" >
-					<div id="2" class="card"><input class="form-control"></div>
-				</div>
-				<div class="marker-box" >
-					<div class ="card-marker red-card-marker hidden" style="background: red;" ></div>
-					<div class ="card-marker blue-card-marker hidden" style="background: #8B94D8;"></div>
-					<div class ="card-marker green-card-marker hidden" style="background: #8DE788;"></div>
-					<div class ="card-marker purple-card-marker hidden" style="background: #B782D6;"></div>
-					<div class ="card-marker gray-card-marker hidden" style="background: #DCDCDC;"></div>
-					<div class ="card-marker yellow-card-marker hidden" style="background: #FFFF63;"></div>
-					<span class="stretch"></span>
-				</div>
-			</div>
- 		</div>
-		
-		
- 	<div class="panel panel-default" style="height: 600px" >
- 		<b><h3>Players</h3></b>
- 		<br>
- 		<div class="player-box" style="background: #FFAAAA;" id="red-player-box" value="red">
- 			<label for="red-player-box-text">Sorcery:</label>
- 			<span id="red-player-box-text"></span>
- 			<!--<input id="red-player-box-user_id"> -->
- 		</div>
- 		<div class="player-box" style="background: #8B94D8;" id="blue-player-box" value="blue">
- 			<label for="blue-player-box-text">Divinity:</label>
- 			<span id="blue-player-box-text"></span>
- 			<!--<input id="blue-player-box-user_id"> -->
- 		</div>
- 		<div class="player-box" style="background: #8DE788;" id="green-player-box" value="green">
- 			<label for="green-player-box-text">Natural:</label>
- 			<span id="green-player-box-text"></span>
- 			<!--<input id="green-player-box-user_id"> -->
- 		</div>
- 		<div class="player-box" style="background: #B782D6;" id="purple-player-box" value="purple">
- 			<label for="purple-player-box-text">Planar:</label>
- 			<span id="purple-player-box-text"></span>
- 			<!--<input id="purple-player-box-user_id"> -->
- 		</div>
- 		<div class="player-box" style="background: #DCDCDC;" id="gray-player-box" value="gray">
- 			<label for="gray-player-box-text">Mysticism:</label>
- 			<span id="gray-player-box-text"></span>
- 			<!--<input id="gray-player-box-user_id"> -->
- 		</div>
- 		<div class="player-box" style="background: #FFFF63;">
- 			<label for="yellow-player-box-text">Neutral:</label>
- 			<span id="yellow-player-box-text"></span>
- 			<!--<input id="yellow-player-box-user_id"> -->
- 		</div>
- 	</div>
-  
- </div>	
 
 
 
@@ -241,214 +87,263 @@
 
 {% block scripts %}
 <script type="text/javascript">
-// BoardState
-var current_color = "red";
-var players = {}
+$(document).ready(function(){
+	$('#sidebar_collapse').on('click', function(){
+		$('#sidebar').toggleClass('active')
+	})
+})
 
-var colors = {
- 	red: "#FFAAAA",
- 	sorcery: "#FFAAAA"
- }
+// Initialize the board state for the board
 var board_state = {}
 
-for (i = 1; i < 13; i++){
-	board_state["card_" + i] = {
-		red: false,
-		blue: false,
-		green: false,
-		purple: false,
-		gray: false,
-		yellow: false,
-	}
+for (i = 0; i < 12; i++){
+    board_state["card_" + i] = {
+        red: false,
+        blue: false,
+        green: false,
+        purple: false,
+        gray: false,
+        yellow: false,
+    }
 }
 
-//Constants 
-var username = "{{request.session.username}}"
-var user_id = "{{request.session.user_id}}"
+// Initialize the view for the board
+$cardbox = $("#cardbox")
 
-
-// Websocket stuff
-var socket = new WebSocket("ws://" + window.location.host + "/room/join/{{room.room_id|safe}}/");
-
-socket.onopen = function(){
-	socket.send(JSON.stringify({
-		// This safe stuff might be a security risk. Rethink it later after PoC stage
-		player_id: "{{request.session.user_id|safe}}",
-		player_name: "{{request.session.username|safe}}",
-		room_id: "{{room.room_id|safe}}",
-		room_name: "{{room.room_name|safe}}",
-		type: "initial_connect",
-		// user_color: "red",
-	}))
+function update_bs_data(json){
+    for (var key in json){
+        if (!json.hasOwnProperty(key)){
+            continue;
+        }
+        card_data = json[key]
+        bs_card = board_state[key]
+        for (var color in card_data){
+            if (!json.hasOwnProperty(key)){
+               continue;
+            }
+            bs_card[color] = card_data[color]
+        }
+    }
 }
-
- socket.onmessage = function(message){
- 	// unpack the JSON file and extract the data type
- 	data = JSON.parse(message.data)
- 	type = data["type"]
-
- 	console.log("recieved the following datatype: ", type)
-
- 	switch (type){
- 		case "update_game_state":
- 			update_game_state(data)
- 			break;
- 		case "test":
- 			console.log("RECIEVED TEST MESSAGE");
- 			console.log(data);
- 			break;
- 		// case "update_board_state":
- 		// 	update_board_state(data)
- 		// 	break;
- 		// case "player_update":
- 		// 	break;
- 		// case "update_player_colors":
- 		// 	console.log("updating_player_colors")
- 		// 	recieve_player_color_update(data["player_dict"], data["player_colors"])
- 		// 	break;
- 		default:
- 			console.log(data)
- 			break;
- 	}
-
- }
+7
+function update_bs_view(){
+	for (var card in board_state){
+        if (!board_state.hasOwnProperty(card)){
+            continue;
+        }
+        card_data = board_state[card]
+        cur_card = $("#" + card)
+        for (var color in card_data){
+            if (!card_data.hasOwnProperty(color)){
+               continue;
+            }
+            // Get the card
+            console.log(cur_card)
+            console.log(color)
+            console.log(card)
+        }
+    }	
+}
+update_bs_view()
 
 
- //player box clicks
- $(".player-box").click(function(){
- 	var box_id = $(this).attr("id")
- 	color = box_id.split("-")[0]
- 	console.log(color)
- 	// check if player is not allowed
- 	var confirmation = confirm("Assign/deassign self to player: " + color)
- 	console.log(confirmation)
- 	if (confirmation == true){
- 		if ($(this).find("span").text() == ""){
- 			console.log("changing name to " + name)
- 			send_player_color_update(socket, user_id, $(this).attr("value"), true)
- 			//$(this).find("span").text(username)
- 		}
- 		else {
- 			console.log("reverting name to none ")
- 			//$(this).find("span").text("")
- 			send_player_color_update(socket, user_id, $(this).attr("value"), false)
- 		}
- 	}
- })
+// // BoardState
+// var current_color = "red";
+// var players = {}
 
- $(".box").click(function(e){
- 	if (!$(e.target).hasClass("card") ){
- 		return
- 	}
- 	console.log("TEST")
- 	console.log($(this).attr("id"))
- 	var $card_marker = $(this).find("." + current_color + "-card-marker")
- 	var $card = $($(this).find(".card")[0])
- 	// if ($card_marker.hasClass("hidden")){
- 	// 	$card_marker.removeClass("hidden")
- 	// }
- 	// else{
- 	// 	$card_marker.addClass("hidden")
- 	// }
- 	console.log($(this))
- 	console.log("CARD")
- 	console.log($card[0])
+// var colors = {
+//  	red: "#FFAAAA",
+//  	sorcery: "#FFAAAA"
+//  }
 
- 	send_mark_update(socket, $card.attr("id"), current_color, !$card_marker.hasClass("hidden"))
 
- })
+// //Constants 
+// var username = "{{request.session.username}}"
+// var user_id = "{{request.session.user_id}}"
 
-// Recieving of updates
-var update_board_state = function(board_state){
-	console.log(board_state)
-	var all_boxes = $(".box")
-	console.log("UPDATING BOARD STATE")
-	console.log("all_boxes: " + all_boxes)
-	for (i = 0; i < 12; i++){
-		var cur_box = all_boxes[i]
-		console.log("cur_box: " + cur_box)
-		var cur_markers = $(cur_box).find(".card-marker")
-		var cur_card = board_state[i]
-		var colors = ["red", "blue", "green", "purple", "gray", "yellow"]
-		console.log("editing card " + i)
-		for (j in colors){
-			var cur_col = colors[j]
-			var cur_marker = cur_markers[j]
+
+// // Websocket stuff
+// var socket = new WebSocket("ws://" + window.location.host + "/room/join/{{room.room_id|safe}}/");
+
+// socket.onopen = function(){
+// 	socket.send(JSON.stringify({
+// 		// This safe stuff might be a security risk. Rethink it later after PoC stage
+// 		player_id: "{{request.session.user_id|safe}}",
+// 		player_name: "{{request.session.username|safe}}",
+// 		room_id: "{{room.room_id|safe}}",
+// 		room_name: "{{room.room_name|safe}}",
+// 		type: "initial_connect",
+// 		// user_color: "red",
+// 	}))
+// }
+
+//  socket.onmessage = function(message){
+//  	// unpack the JSON file and extract the data type
+//  	data = JSON.parse(message.data)
+//  	type = data["type"]
+
+//  	console.log("recieved the following datatype: ", type)
+
+//  	switch (type){
+//  		case "update_game_state":
+//  			update_game_state(data)
+//  			break;
+//  		case "test":
+//  			console.log("RECIEVED TEST MESSAGE");
+//  			console.log(data);
+//  			break;
+//  		// case "update_board_state":
+//  		// 	update_board_state(data)
+//  		// 	break;
+//  		// case "player_update":
+//  		// 	break;
+//  		// case "update_player_colors":
+//  		// 	console.log("updating_player_colors")
+//  		// 	recieve_player_color_update(data["player_dict"], data["player_colors"])
+//  		// 	break;
+//  		default:
+//  			console.log(data)
+//  			break;
+//  	}
+
+//  }
+
+
+//  //player box clicks
+//  $(".player-box").click(function(){
+//  	var box_id = $(this).attr("id")
+//  	color = box_id.split("-")[0]
+//  	console.log(color)
+//  	// check if player is not allowed
+//  	var confirmation = confirm("Assign/deassign self to player: " + color)
+//  	console.log(confirmation)
+//  	if (confirmation == true){
+//  		if ($(this).find("span").text() == ""){
+//  			console.log("changing name to " + name)
+//  			send_player_color_update(socket, user_id, $(this).attr("value"), true)
+//  			//$(this).find("span").text(username)
+//  		}
+//  		else {
+//  			console.log("reverting name to none ")
+//  			//$(this).find("span").text("")
+//  			send_player_color_update(socket, user_id, $(this).attr("value"), false)
+//  		}
+//  	}
+//  })
+
+//  $(".box").click(function(e){
+//  	if (!$(e.target).hasClass("card") ){
+//  		return
+//  	}
+//  	console.log("TEST")
+//  	console.log($(this).attr("id"))
+//  	var $card_marker = $(this).find("." + current_color + "-card-marker")
+//  	var $card = $($(this).find(".card")[0])
+//  	// if ($card_marker.hasClass("hidden")){
+//  	// 	$card_marker.removeClass("hidden")
+//  	// }
+//  	// else{
+//  	// 	$card_marker.addClass("hidden")
+//  	// }
+//  	console.log($(this))
+//  	console.log("CARD")
+//  	console.log($card[0])
+
+//  	send_mark_update(socket, $card.attr("id"), current_color, !$card_marker.hasClass("hidden"))
+
+//  })
+
+// // Recieving of updates
+// var update_board_state = function(board_state){
+// 	console.log(board_state)
+// 	var all_boxes = $(".box")
+// 	console.log("UPDATING BOARD STATE")
+// 	console.log("all_boxes: " + all_boxes)
+// 	for (i = 0; i < 12; i++){
+// 		var cur_box = all_boxes[i]
+// 		console.log("cur_box: " + cur_box)
+// 		var cur_markers = $(cur_box).find(".card-marker")
+// 		var cur_card = board_state[i]
+// 		var colors = ["red", "blue", "green", "purple", "gray", "yellow"]
+// 		console.log("editing card " + i)
+// 		for (j in colors){
+// 			var cur_col = colors[j]
+// 			var cur_marker = cur_markers[j]
 			
-			// console.log("cur_col: " + cur_col)
-			// console.log("current_card: " + cur_card[cur_col])
-			if (cur_card[cur_col] == true || cur_card[cur_col] == 1){
-				console.log("UNHIDING")
-				$(cur_marker).removeClass("hidden")
-			}
-			else {
-				$(cur_marker).addClass("hidden")
-			}	
-		}
-	}
-}
+// 			// console.log("cur_col: " + cur_col)
+// 			// console.log("current_card: " + cur_card[cur_col])
+// 			if (cur_card[cur_col] == true || cur_card[cur_col] == 1){
+// 				console.log("UNHIDING")
+// 				$(cur_marker).removeClass("hidden")
+// 			}
+// 			else {
+// 				$(cur_marker).addClass("hidden")
+// 			}	
+// 		}
+// 	}
+// }
 
-// Update the tracker of all players in room
-// Input: dictionary object containing player_id: player_name pairs
-var update_players = function(player_dict){
-	console.log("updating_players")
-	console.log(player_dict)
-	players = player_dict
-}
+// // Update the tracker of all players in room
+// // Input: dictionary object containing player_id: player_name pairs
+// var update_players = function(player_dict){
+// 	console.log("updating_players")
+// 	console.log(player_dict)
+// 	players = player_dict
+// }
 
-var update_player_colors = function(player_dict, player_colors){
-	// recieves two dictionary objects and updates the player state
-	// player_dict: dictionary of player_id keys, player_name indices
-	// player_colors: dictionary of color keys player_id indicies
-	console.log("Updating player colors")
-	console.log(player_dict)
-	console.log(player_colors)
-	var all_player_ids = Object.keys(player_dict)
-	for (color in player_colors){
-		var player_id = player_colors[color]
-		// Check if room is to be emptied
-		if (player_id === ""){
-			$("#" + color + "-player-box-text").text(player_id)
-		}
-		else {
-			$("#" + color + "-player-box-text").text(player_dict[player_id])	
-		}
-	}
-}
+// var update_player_colors = function(player_dict, player_colors){
+// 	// recieves two dictionary objects and updates the player state
+// 	// player_dict: dictionary of player_id keys, player_name indices
+// 	// player_colors: dictionary of color keys player_id indicies
+// 	console.log("Updating player colors")
+// 	console.log(player_dict)
+// 	console.log(player_colors)
+// 	var all_player_ids = Object.keys(player_dict)
+// 	for (color in player_colors){
+// 		var player_id = player_colors[color]
+// 		// Check if room is to be emptied
+// 		if (player_id === ""){
+// 			$("#" + color + "-player-box-text").text(player_id)
+// 		}
+// 		else {
+// 			$("#" + color + "-player-box-text").text(player_dict[player_id])	
+// 		}
+// 	}
+// }
 
-// Perform a complete sync of the client with the game server
-var update_game_state = function(data){
-	update_players(data["player_dict"])
-	update_player_colors(data["player_dict"], data["player_colors"])
-	update_board_state(data["board_state"])
-}
+// // Perform a complete sync of the client with the game server
+// var update_game_state = function(data){
+// 	update_players(data["player_dict"])
+// 	update_player_colors(data["player_dict"], data["player_colors"])
+// 	update_board_state(data["board_state"])
+// }
 
-// Sending of updates
-var send_mark_update = function(socket, card_number, color, state){
-	console.log(card_number, color, state)
-	var message = {
-		type: "update_card",
-		card_number: card_number,
-		mark_state: state,
-		player_color: color
-	}
-	console.log("SENDING")
-	socket.send(JSON.stringify(message))
-}
+// // Sending of updates
+// var send_mark_update = function(socket, card_number, color, state){
+// 	console.log(card_number, color, state)
+// 	var message = {
+// 		type: "update_card",
+// 		card_number: card_number,
+// 		mark_state: state,
+// 		player_color: color
+// 	}
+// 	console.log("SENDING")
+// 	socket.send(JSON.stringify(message))
+// }
 
-var send_player_color_update = function(socket, user_id, color, state){
-	console.log("sending color update")
-	console.log(user_id, color, state)
-	var message = {
-		type: "update_player_color",
-		player_id: user_id,
-		state: state,
-		color: color
-	}
-	console.log("SENDING")
-	socket.send(JSON.stringify(message))
-}
+// var send_player_color_update = function(socket, user_id, color, state){
+// 	console.log("sending color update")
+// 	console.log(user_id, color, state)
+// 	var message = {
+// 		type: "update_player_color",
+// 		player_id: user_id,
+// 		state: state,
+// 		color: color
+// 	}
+// 	console.log("SENDING")
+// 	socket.send(JSON.stringify(message))
+// }
 
-</script>
+// </script>
 
 {% endblock %}
